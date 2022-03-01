@@ -20,3 +20,6 @@ In this study (Ver. 1), we consider the continuous control system. We do not use
         #======================================================================
 ```
 Please check STL_SAC_NCSs_dynamics/dynamics.pdf.
+
+## Update Version
+Please show https://github.com/pondbooks/STL_SAC_NCSs_Ver2.
