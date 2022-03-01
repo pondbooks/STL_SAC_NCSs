@@ -2,7 +2,7 @@
 This repository includes source codes for https://arxiv.org/abs/2108.01317 (Ver. 1), which are beta version. We will add the descriptions by coment out and may revise these source codes. We should use gym 0.18.0.
 
 ## Dynamics
-Please check STL_SAC_NCSs_dynamics/dynamics.pdf.
+In this study (Ver. 1), we consider the continuous control system. We do not use a numerical integration solver, but we compute the system dynamics as follows: 
 ```
         # next step================================================
         if abs(true_action[1]) <= 0.01:
@@ -19,3 +19,4 @@ Please check STL_SAC_NCSs_dynamics/dynamics.pdf.
             self.state[2] -= np.pi * 2.0
         #======================================================================
 ```
+Please check STL_SAC_NCSs_dynamics/dynamics.pdf.
