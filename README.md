@@ -1,5 +1,5 @@
 # Soft actor critic for satisfying STL specifications with network delays (Ver. 1)
-This repository includes source codes for https://arxiv.org/abs/2108.01317 (Ver. 1), which are beta version. We will add the descriptions by coment out and may revise these source codes. We should use gym 0.18.0.
+This repository includes source codes for https://arxiv.org/abs/2108.01317v1 (Ver. 1), which are beta version. We will add the descriptions by coment out and may revise these source codes. We should use gym 0.18.0.
 
 ## Dynamics
 In this study (Ver. 1), we consider the continuous control system. We do not use a numerical integration solver, but we compute the system dynamics as follows: 
