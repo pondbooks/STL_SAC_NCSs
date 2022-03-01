@@ -1,0 +1,92 @@
+\documentclass[11pt,a4paper]{jsarticle}
+%
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{ascmac}
+\usepackage{pxfonts}
+%
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{40\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.2in}
+\setlength{\topmargin}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+
+\begin{document}
+We consider the following continuous-time dynamical system in Ver.\ 1.
+\begin{eqnarray}
+\frac{\text{d}}{\text{d}t}\begin{bmatrix}
+   x(t)\\
+   y(t)\\
+   \theta(t)
+\end{bmatrix}=\begin{bmatrix}
+   \cos\theta(t) & 0 \\
+   \sin\theta(t) & 0 \\
+   0 & 1
+\end{bmatrix}\begin{bmatrix}
+   u_1(t)\\
+   u_2(t)
+\end{bmatrix}.
+\end{eqnarray}
+In this study, we design a digital controller with the sampling period $\Delta\ge0$, that is
+\begin{eqnarray}
+\begin{bmatrix}
+   u_1(t) \\
+   u_2(t)
+\end{bmatrix}=\begin{bmatrix}
+   u_{1,k} \\
+   u_{2,k}
+\end{bmatrix},\ \forall t\in[k\Delta,(k+1)\Delta).
+\end{eqnarray}
+It is assumed that the system state at $t=k\Delta$ is $[x_{k}\ y_{k}\ \theta_{k}]^{\top}$.
+
+Then, 
+\begin{eqnarray}
+\theta_{k+1}=\theta((k+1)\Delta)=\theta_{k}+\int_{k\Delta}^{(k+1)\Delta}u_{2,k}\text{d}t=\theta_{k}+u_{2,k}\Delta.
+\end{eqnarray}
+Additionally, 
+\begin{eqnarray}
+x_{k+1}&=&x_{k}+u_{1,k}\int_{k\Delta}^{(k+1)\Delta}\cos\theta(t)\text{d}t,\\
+y_{k+1}&=&y_{k}+u_{1,k}\int_{k\Delta}^{(k+1)\Delta}\sin\theta(t)\text{d}t,
+\end{eqnarray}
+where $\theta(t)=\theta_{k}+u_{2,k}(t-k\Delta),\ t\in[k\Delta,(k+1)\Delta)$.
+
+\begin{enumerate}
+\item If $u_{2,k}=0$,
+	\begin{eqnarray}
+	x_{k+1}&=&x_{k}+u_{1,k}\cos\theta_{k}\Delta,\\
+	y_{k+1}&=&y_{k}+u_{1,k}\sin\theta_{k}\Delta,\\
+	\theta_{k+1}&=&\theta_{k}.
+	\end{eqnarray}
+\item If $u_{2,k}\neq0$,
+	\begin{eqnarray}
+	\int_{k\Delta}^{(k+1)\Delta}\cos(t)\text{d}t&=&\int_{k\Delta}^{(k+1)\Delta}\cos(\theta_{k}+u_{2,k}(t-k\delta)\text{d}t\nonumber\\
+	&=&\frac{1}{u_{2,k}}\left[\sin(\theta_{k}+u_{2,k}(t-k\Delta))\right]_{k\Delta}^{(k+1)\Delta}\nonumber\\
+	&=&\frac{1}{u_{2,k}}(\sin(\theta_{k}+u_{2,k}\Delta)-\sin\theta_{k}),\nonumber
+	\end{eqnarray}
+	\begin{eqnarray}
+	\int_{k\Delta}^{(k+1)\Delta}\sin(t)\text{d}t&=&\int_{k\Delta}^{(k+1)\Delta}\sin(\theta_{k}+u_{2,k}(t-k\delta)\text{d}t\nonumber\\
+	&=&\frac{-1}{u_{2,k}}\left[\cos(\theta_{k}+u_{2,k}(t-k\Delta))\right]_{k\Delta}^{(k+1)\Delta}\nonumber\\
+	&=&\frac{-1}{u_{2,k}}(\cos(\theta_{k}+u_{2,k}\Delta)-\cos\theta_{k}),\nonumber
+	\end{eqnarray}
+	Then, 
+	\begin{eqnarray}
+	x_{k+1}&=&x_{k}+\frac{u_{1,k}}{u_{2,k}}(\sin(\theta_{k}+u_{2,k}\Delta)-\sin\theta_{k}),\\
+	y_{k+1}&=&y_{k}+\frac{u_{1,k}}{u_{2,k}}(\cos\theta_{k}-\cos(\theta_{k}+u_{2,k}\Delta)),\\
+	\theta_{k+1}&=&\theta_{k}+u_{2,k}\Delta.
+	\end{eqnarray}
+	If $u_{2,k}\simeq0$, then, 
+	\begin{eqnarray}
+	&&\lim_{u_{2,k}\Delta\to0}\frac{\sin(\theta_{k}+u_{2,k}\Delta)-\sin\theta_{k}}{u_{2,k}\Delta}=\cos\theta_{k},\nonumber\\
+	&&\lim_{u_{2,k}\Delta\to0}\frac{\cos(\theta_{k}+u_{2,k}\Delta)-\cos\theta_{k}}{u_{2,k}\Delta}=-\sin\theta_{k},\nonumber
+	\end{eqnarray}
+	In this case, 
+	\begin{eqnarray}
+	x_{k+1}&=&x_{k}+u_{1,k}\Delta\cos\theta_{k},\\
+	y_{k+1}&=&y_{k}+u_{1,k}\Delta\sin\theta_{k},\\
+	\theta_{k+1}&=&\theta_{k}+u_{2,k}\Delta.
+	\end{eqnarray}
+\end{enumerate}
+\end{document}
